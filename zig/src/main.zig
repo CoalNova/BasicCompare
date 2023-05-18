@@ -52,12 +52,13 @@ pub fn main() !void {
 
         //process accounts for collection
         for (0..opers) |_|
-            for (0..opers) |i| {
-                const a: Account = accounts.items[i];
-                const payment: i32 = if (a.balance < a.current_bill) a.balance else a.current_bill;
-                accounts.items[i].paid_amount += payment;
-                accounts.items[i].current_bill += a.current_bill - payment + @intCast(i32, rng.next() % 100);
-                accounts.items[i].balance += @intCast(i32, rng.next() % 100);
+            for (accounts.items) |*account| {
+                const payment: i32 = if (account.balance < account.current_bill) account.balance else account.current_bill;
+                account.paid_amount += payment;
+                account.paid_amount >>= 2;
+                account.current_bill += account.current_bill - payment + @intCast(i32, rng.next() % 100);
+                account.current_bill >>= 2;
+                account.balance += @intCast(i32, rng.next() % 100);
             };
 
         //grab time
