@@ -1,6 +1,7 @@
 # BasicCompare
 A basic comparitive analysis of C, C++, Rust, and Zig.
 ---
+![pretty command line text](https://github.com/CoalNova/BasicCompare/blob/main/ast/sc.png?raw=true)
 
 The goal of this project was to test operational time performance for each language using as like operations as possible. Though per-lang optimizations could be performed, all of the languages allow for inline assembly, meaning this would get real nasty, real quick. The implementation is meant to be a naive, or at least a beginner's basic approach to the problem.
 
