@@ -1,1 +1,4 @@
-./rust/target
+rust/target
+zig/zig-cache
+zig/zig-out
+program*
