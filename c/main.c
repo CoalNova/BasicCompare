@@ -74,7 +74,9 @@ int main(int argc, char ** argv)
                 Account a = ac.data[j];
                 int payment = (a.balance < a.currentBill)? a.balance : a.currentBill; 
                 ac.data[j].paidAmount += payment;
+                ac.data[j].paidAmount >>= 2;
                 ac.data[j].currentBill += a.currentBill - payment + rand() % 100;
+                ac.data[j].currentBill >>= 2;
                 ac.data[j].balance += rand() % 100;
             }
         }
