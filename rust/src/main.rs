@@ -36,20 +36,25 @@ fn main() {
         for i in 0..opers {
             accounts.push(Account{
                 account_id : i as i32,
-                current_bill : (rng.next_u32() % 1000) as i32,
-                balance: (rng.next_u32() % 100)as i32,
-                paid_amount: (rng.next_u32() % 1000) as i32
+                current_bill : rng.gen::<i32>() % 100,
+                balance: rng.gen::<i32>() % 100,
+                paid_amount: rng.gen::<i32>() % 100
             });
         }
         
         //process accounts for collection
         for _ in 0..opers{
-            for i in 0..opers{
-                let a: Account = accounts[i as usize];
-                let payment: i32 = if a.balance < a.current_bill {a.balance} else {a.current_bill};
-                accounts[i as usize].paid_amount += payment;
-                accounts[i as usize].current_bill += a.current_bill - payment + (rng.next_u32() % 100) as i32;
-                accounts[i as usize].balance += (rng.next_u32() % 100) as i32;
+            for account in accounts.iter_mut(){
+                let payment: i32 = if account.balance < account.current_bill 
+                    {account.balance} 
+                else 
+                    {account.current_bill};
+                account.paid_amount += payment;
+                account.paid_amount >>= 2;
+                account.current_bill += account.current_bill - payment + rng.gen::<i32>() % 100;
+                account.current_bill >>= 2;
+                account.balance += rng.gen::<i32>() % 100;
+
             }
         }
 
@@ -64,5 +69,5 @@ fn main() {
     }
     //print result
     print!("Done! after {:?}\n", total.elapsed());
-    print!("\tmax: {:?}, min: {:?}, avg: {:?}\n\n", max, min, average / iters);
+    print!("\tmax: {:?}, min: {:?}, avg: {:?} nanoseconds\n\n", max.subsec_nanos(), min.subsec_nanos(), (average / iters).subsec_nanos());
 }
