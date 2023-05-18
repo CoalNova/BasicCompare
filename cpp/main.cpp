@@ -48,7 +48,9 @@ int main(int argc, char ** argv)
             {
                 int payment = (account.balance < account.currentBill)?  account.balance : account.currentBill; 
                 account.paidAmount += payment;
+                account.paidAmount >>= 2;
                 account.currentBill += account.currentBill - payment + rand() % 100;
+                account.currentBill >>= 2;
                 account.balance += rand() % 100;
             }
         
