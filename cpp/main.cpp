@@ -20,8 +20,8 @@ int main(int argc, char ** argv)
     using namespace std;
     using namespace std::chrono;
     unsigned int 
-        iters = (argc > 1) ? stoi(argv[1]): 100, 
-        opers = (argc > 2) ? stoi(argv[2]): 100, 
+        opers = (argc > 1) ? stoi(argv[1]): 100, 
+        iters = (argc > 2) ? stoi(argv[2]): 100, 
         min = UINT32_MAX,
         max = 0, 
         average = 0;
