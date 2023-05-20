@@ -54,7 +54,7 @@ int main(int argc, char ** argv)
         srand(opers + iters + iteration);
         
         //initialize collection
-        AccountCollection ac = InitCollection();
+        AccountCollection accounts = InitCollection();
         //fill collection
         for (size_t i = 0; i < opers; i++)
         {
@@ -63,26 +63,26 @@ int main(int argc, char ** argv)
             account.balance = rand() % 1000;
             account.currentBill = rand() % 100;
             account.paidAmount = rand() % 1000;
-            PushToCollection(&ac, account);
+            PushToCollection(&accounts, account);
         }
         
         //process accounts for collection
         for (size_t i = 0; i < opers; i++)
         {
-            for (size_t j = 0; j < ac.count; j++)
+            for (size_t j = 0; j < accounts.count; j++)
             {
-                Account a = ac.data[j];
+                Account a = accounts.data[j];
                 int payment = (a.balance < a.currentBill)? a.balance : a.currentBill; 
-                ac.data[j].paidAmount += payment;
-                ac.data[j].paidAmount >>= 2;
-                ac.data[j].currentBill += a.currentBill - payment + rand() % 100;
-                ac.data[j].currentBill >>= 2;
-                ac.data[j].balance += rand() % 100;
+                accounts.data[j].paidAmount += payment;
+                accounts.data[j].paidAmount >>= 2;
+                accounts.data[j].currentBill += a.currentBill - payment + rand() % 100;
+                accounts.data[j].currentBill >>= 2;
+                accounts.data[j].balance += rand() % 100;
             }
         }
         
         //free collection
-        DeinitCollection(&ac);
+        DeinitCollection(&accounts);
 
         //grab time
         end = clock();
@@ -104,30 +104,30 @@ int main(int argc, char ** argv)
 
 AccountCollection InitCollection()
 {
-    AccountCollection ac;
-    ac.count = 0;
-    ac.size = 4;
-    ac.data = malloc(sizeof(Account) * ac.size);
-    return ac;
+    AccountCollection accounts;
+    accounts.count = 0;
+    accounts.size = 4;
+    accounts.data = malloc(sizeof(Account) * accounts.size);
+    return accounts;
 }
 
-void DeinitCollection(AccountCollection* ac)
+void DeinitCollection(AccountCollection* accounts)
 {
-    free(ac->data);
-    ac->count = 0;
-    ac->size = 0;
-    ac->data = 0;
+    free(accounts->data);
+    accounts->count = 0;
+    accounts->size = 0;
+    accounts->data = 0;
 }
 
-void PushToCollection(AccountCollection* ac, Account account)
+void PushToCollection(AccountCollection* accounts, Account account)
 {
-    if (ac->count + 1 >= ac->size)
+    if (accounts->count + 1 >= accounts->size)
     {
-        Account* newdata = malloc(sizeof(Account) * ac->size * 2);
-        memcpy(newdata, ac->data, ac->size);
-        free(ac->data);
-        ac->data = newdata;
-        ac->size *= 2;
+        Account* newdata = malloc(sizeof(Account) * accounts->size * 2);
+        memcpy(newdata, accounts->data, accounts->size);
+        free(accounts->data);
+        accounts->data = newdata;
+        accounts->size *= 2;
     }
-    ac->data[ac->count++] = account;
+    accounts->data[accounts->count++] = account;
 }

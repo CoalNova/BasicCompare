@@ -2,3 +2,6 @@ rust/target
 zig/zig-cache
 zig/zig-out
 program*
+haskell/*
+haskell/main.hs
+java/*.class
