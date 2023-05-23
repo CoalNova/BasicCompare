@@ -1,4 +1,3 @@
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -49,7 +48,7 @@ public class jmain{
         //print result
 
         System.out.println("Done! after " + String.valueOf((System.nanoTime() - total) / 1e9) + " seconds");
-        System.out.println("\tmax: " + max + ", min: " + min + ", avg: " + (average / iters) + " nanoseconds");
+        System.out.println("\tmax: " + max + ", min: " + min + ", avg: " + (average / iters) + " nanoseconds\n");
     } 
 
 }

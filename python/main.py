@@ -60,4 +60,4 @@ for iteration in range(iters):
 
 #print result
 print("Done! after " + str((time.time_ns() - total) / 1e9) + " seconds")
-print("\tmax: " + str(max) + ", min: " + str(min) + ", avg: " + str(int(average / iters)) + " nanoseconds\n\n")
+print("\tmax: " + str(max) + ", min: " + str(min) + ", avg: " + str(int(average / iters)) + " nanoseconds\n")
